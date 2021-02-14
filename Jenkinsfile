@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
-        DOCKER_IMAGE_NAME = "gkhnsmsk/train-schedule"
+        DOCKER_IMAGE_NAME = "gsimsek/train-schedule-kubernetes"
     }
     stages {
         stage('Build') {
