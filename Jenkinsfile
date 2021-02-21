@@ -46,11 +46,18 @@ stage('DeployToProduction') {
             steps {
                 input 'Deploy to Production?'
                 milestone(1)
-                kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig',
-                    configs: 'train-schedule-kube.yml',
-                    enableConfigSubstitution: true
-                )
+                sh "scp -o StrictHostKeyChecking=no kubeconfig.yml ubuntu@35.158.92.60:/home/ubuntu"
+                script{
+                    try{
+                        sh "ssh ubuntu@35.158.92.60 kubectl apply -f ."
+                    }catch(error){
+                        sh "ssh ubuntu@35.158.92.60 kubectl create -f ."
+                    }
+//                kubernetesDeploy(
+//                    kubeconfigId: 'kubeconfig',
+//                    configs: 'train-schedule-kube.yml',
+//                    enableConfigSubstitution: true
+//                )
             }
         }
     }
