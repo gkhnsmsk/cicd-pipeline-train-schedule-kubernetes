@@ -46,8 +46,8 @@ pipeline {
             steps {
                 input 'Deploy to Production?'
                 milestone(1)
-                sshagent(['kubernetes_master_server']){
-                    sh "scp -o StrictHostKeyChecking=no kubeconfig.yml ubuntu@35.158.92.60:/home/ubuntu"
+                sshagent(['kubemaster_username_privatekey']){
+                    sh "scp -o StrictHostKeyChecking=no train-schedule-kube.yml ubuntu@35.158.92.60:/home/ubuntu"
                     script{
                         try{
                             sh "ssh ubuntu@35.158.92.60 kubectl apply -f ."
