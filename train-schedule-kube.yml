@@ -1,23 +1,29 @@
 --- 
-apiVersion: apps/v1
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
-metadata: 
-  labels: 
-    app: train-schedule
+metadata:
   name: train-schedule-deployment
-spec: 
-  replicas: 2
-  selector: 
-    matchLabels: 
+  labels:
+    app: train-schedule
+spec:
+  selector:
+    matchLabels:
       app: train-schedule
-  template: 
-    metadata: 
-      labels: 
+      tier: backend
+  replicas: 2
+  template:
+    metadata:
+      labels:
         app: train-schedule
-    spec: 
-      containers: 
-        - 
-          image: "$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
+        tier: backend
+    spec:
+      containers:
+      - name: train-schedule
+        image: {$DOCKER_IMAGE_NAME:$BUILD_NUMBER}
+      imagePullSecrets:
+      - name: regsecret
+        ports:
+        - containerPort: 8080
           name: train-schedule
 --- 
 apiVersion: v1
