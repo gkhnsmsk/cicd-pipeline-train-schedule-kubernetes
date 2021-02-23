@@ -19,7 +19,7 @@ spec:
       containers:
 #      - image: gsimsek/train-schedule-kubernetes:latest
 #      - image: $docker_image_name:$build_number
-        image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
+      - image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
         name: train-schedule
         ports:
           - containerPort: 8080
