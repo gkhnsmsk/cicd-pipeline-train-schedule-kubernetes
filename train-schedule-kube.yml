@@ -1,38 +1,35 @@
+--- 
 apiVersion: apps/v1
 kind: Deployment
-metadata:
+metadata: 
+  labels: 
+    app: train-schedule
   name: train-schedule-deployment
-  labels:
-    app: train-schedule
-spec:
+spec: 
   replicas: 2
-  selector:
-    matchLabels:
+  selector: 
+    matchLabels: 
       app: train-schedule
-  template:
-    metadata:
-      labels:
+  template: 
+    metadata: 
+      labels: 
         app: train-schedule
-    spec:
-      containers:
-      - name: train-schedule
-        image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
-        ports:
-        - containerPort: 8080
----
-
-kind: Service
+    spec: 
+      containers: 
+        - 
+          image: "$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
+          name: train-schedule
+--- 
 apiVersion: v1
-metadata:
+kind: Service
+metadata: 
   name: train-schedule-service
-spec:
-  type: NodePort
-  selector:
+spec: 
+  ports: 
+    - 
+      nodePort: 30001
+      port: 8080
+      protocol: TCP
+  selector: 
     app: train-schedule
-  ports:
-  - protocol: TCP
-    port: 8080
-    nodePort: 30001
-##        port: 8080 (original)
-##    nodePort: 8080 (original)
-#degisti    
+  type: NodePort
