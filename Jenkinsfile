@@ -43,6 +43,7 @@ pipeline {
             }
         }
         stage('DeployToProduction') {
+            sh "echo $DOCKER_IMAGE_NAME:$BUILD_NUMBER"
             when {
                 branch 'master'
             }
