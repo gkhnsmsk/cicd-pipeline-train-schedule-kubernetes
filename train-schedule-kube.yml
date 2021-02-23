@@ -20,22 +20,21 @@ spec:
       containers:
       - name: train-schedule
         image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
-      imagePullSecrets:
-      - name: regsecret
         ports:
         - containerPort: 8080
-          name: train-schedule
+      imagePullSecrets:
+      - name: regsecret
+
 --- 
-apiVersion: v1
 kind: Service
-metadata: 
+apiVersion: v1
+metadata:
   name: train-schedule-service
-spec: 
-  ports: 
-    - 
-      nodePort: 30001
-      port: 8080
-      protocol: TCP
-  selector: 
-    app: train-schedule
+spec:
   type: NodePort
+  selector:
+    app: train-schedule
+  ports:
+  - protocol: TCP
+    port: 8080
+    nodePort: 30001
