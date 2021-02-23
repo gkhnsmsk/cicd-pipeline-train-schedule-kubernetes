@@ -23,3 +23,17 @@ spec:
           - containerPort: 8080
       imagePullSecrets: 
         - name: regsecret
+---
+  
+kind: Service
+apiVersion: v1
+metadata:
+  name: train-schedule-service
+spec:
+  type: NodePort
+  selector:
+    app: train-schedule
+  ports:
+  - protocol: TCP
+    port: 30001
+    nodePort: 30001
