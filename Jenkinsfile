@@ -3,7 +3,8 @@ pipeline {
     agent any
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
-        DOCKER_IMAGE_NAME = "gsimsek/train-schedule-kubernetes"
+        //DOCKER_IMAGE_NAME = "gsimsek/train-schedule-kubernetes"
+        docker_image_name = "gsimsek/train-schedule-kubernetes"
     }
     stages {
         stage('Build') {
@@ -19,7 +20,8 @@ pipeline {
             }
             steps {
                 script {
-                    app = docker.build(DOCKER_IMAGE_NAME)
+                    //app = docker.build(DOCKER_IMAGE_NAME)
+                    app = docker.build(docker_image_name)
                     app.inside {
                         sh 'echo Hello, World!'
                     }
@@ -33,7 +35,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
-                        app.push("${env.BUILD_NUMBER}")
+                        //app.push("${env.BUILD_NUMBER}")
+                        app.push("${env.build_number}")
                         app.push("latest")
                     }
                 }
