@@ -55,6 +55,7 @@ pipeline {
                 input 'Deploy to Production?'
                 milestone(1)
                 sshagent(['kubemaster_username_privatekey']){
+                    sh "cat train-schedule-kube.yml | sed "s/{{image-name}}/$DOCKER_IMAGE_NAME:$BUILD_NUMBER/g""
                     sh "scp -o StrictHostKeyChecking=no train-schedule-kube.yml ubuntu@35.158.92.60:/home/ubuntu"
                     script{
                         try{
