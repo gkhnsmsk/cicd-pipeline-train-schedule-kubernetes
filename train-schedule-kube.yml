@@ -16,8 +16,9 @@ spec:
         app: train-schedule
 #        tier: backend
     spec: 
-      containers: 
-      - image: $docker_image_name:$build_number
+      containers:
+      - image: $docker_image_name:latest
+#      - image: $docker_image_name:$build_number
 #        image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
         name: train-schedule
         ports:
