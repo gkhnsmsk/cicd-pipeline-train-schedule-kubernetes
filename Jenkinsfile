@@ -44,8 +44,7 @@ pipeline {
         }
         stage('echo') {
             steps {
-            sh "echo $DOCKER_IMAGE_NAME:$BUILD_NUMBER"
-            sh "sed -i "s/{{image-name}}/$DOCKER_IMAGE_NAME:$BUILD_NUMBER/g" train-schedule-kube.yml"    
+            sh "echo $DOCKER_IMAGE_NAME:$BUILD_NUMBER"    
             }
         }
         stage('DeployToProduction') {
