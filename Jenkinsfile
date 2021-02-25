@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Push Docker Image') {
             when {
-                branch 'master'
+                branch 'gokhan_test'
             }
             steps {
                 script {
@@ -41,7 +41,7 @@ pipeline {
         }
         stage('DeployToProduction') {
             when {
-                branch 'master'
+                branch 'gokhan_test'
             }
             steps {
                 input 'Deploy to Production?'
