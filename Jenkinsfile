@@ -54,21 +54,25 @@ pipeline {
             steps {
                 input 'Deploy to Production?'
                 milestone(1)
-                sshagent(['kubemaster_username_privatekey']){
-                    sh "scp -o StrictHostKeyChecking=no train-schedule-kube.yml ubuntu@35.158.92.60:/home/ubuntu"
-                    script{
-                        try{
-                            sh "ssh ubuntu@35.158.92.60 kubectl apply -f train-schedule-kube.yml"
-                        }catch(error){
-                            sh "ssh ubuntu@35.158.92.60 kubectl create -f train-schedule-kube.yml"
-                        }
+                withKubeConfig([credentialsId: 'kubeconfig']) {
+                  sh 'kubectl get pods'
+                }
+                
+//                sshagent(['kubemaster_username_privatekey']){
+//                    sh "scp -o StrictHostKeyChecking=no train-schedule-kube.yml ubuntu@35.158.92.60:/home/ubuntu"
+//                    script{
+//                        try{
+//                            sh "ssh ubuntu@35.158.92.60 kubectl apply -f train-schedule-kube.yml"
+//                        }catch(error){
+//                            sh "ssh ubuntu@35.158.92.60 kubectl create -f train-schedule-kube.yml"
+//                        }
 //                kubernetesDeploy(
 //                    kubeconfigId: 'kubeconfig',
 //                    configs: 'train-schedule-kube.yml',
 //                    enableConfigSubstitution: true
 //                )
-                    }
-                }
+//                    }
+//                }
             }
         }
     }
