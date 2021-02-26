@@ -46,7 +46,7 @@ pipeline {
             steps {
                 input 'Deploy to Production?'
                 milestone(1)
-                withKubeConfig([credentialsId: 'kubeconfig_cloudacedemyk8s', serverUrl: 'https://5705773BD57EC5EE6602E972D8850601.gr7.eu-central-1.eks.amazonaws.com']) {
+                withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://172.31.24.187:6443']) {
                   sh 'kubectl get pods'
                 }
             }
