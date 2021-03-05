@@ -60,7 +60,9 @@ pipeline {
         stage('Deploy Updated Image to Cluster'){
             steps {
                 sh '''
-                    kubectl apply -f /var/lib/jenkins/workspace/train-schedule-kubernetes_master/train-schedule-kube.yml
+                    kubectl apply -f ./train-schedule-kube.yml
+                    kubectl apply -f ./train-schedule-kube.yml -n test
+                    kubectl apply -f ./train-schedule-kube.yml -n prod
                     '''
             }
         }        
