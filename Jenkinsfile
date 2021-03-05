@@ -52,8 +52,9 @@ pipeline {
                 branch 'master'
             }
             steps {
-                withAWS(region:'us-east-1',credentials:'aws') {
-                    sh 'aws eks --region us-east-1 update-kubeconfig --name stage-cluster'       
+                withAWS(region:'eu-central-1',credentials:'aws') {
+                    sh 'aws eks --region eu-central-1 update-kubeconfig --name eksworkshop-eksctl
+'       
                 }
             }
         }
