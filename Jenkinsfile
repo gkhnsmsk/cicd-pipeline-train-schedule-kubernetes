@@ -47,17 +47,32 @@ pipeline {
             sh "echo $DOCKER_IMAGE_NAME:$BUILD_NUMBER"    
             }
         }
-        stage('DeployToProduction') {
+        stage('Update Kube Config') {
             when {
                 branch 'master'
             }
             steps {
-                input 'Deploy to Production?'
-                milestone(1)
-                withKubeConfig([credentialsId: 'kubeconfig',serverUrl: 'https://E5624AA4631FF2516F793E316BA8889E.gr7.eu-central-1.eks.amazonaws.com']) {
-                  sh 'kubectl get pods'
+                withAWS(region:'us-east-1',credentials:'aws') {
+                    sh 'aws eks --region us-east-1 update-kubeconfig --name stage-cluster'       
                 }
-                
+            }
+        }
+        stage('Deploy Updated Image to Cluster'){
+            steps {
+                sh '''
+                    export IMAGE="$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
+                    kubectl apply -f train-schedule-kube.yml
+                    '''
+            }
+        }        
+    }
+}
+
+//                input 'Deploy to Production?'
+//                milestone(1)
+//                withKubeConfig([credentialsId: 'kubeconfig',serverUrl: 'https://E5624AA4631FF2516F793E316BA8889E.gr7.eu-central-1.eks.amazonaws.com']) {
+//                sh 'kubectl get pods'
+
 //                sshagent(['kubemaster_username_privatekey']){
 //                    sh "scp -o StrictHostKeyChecking=no train-schedule-kube.yml ubuntu@35.158.92.60:/home/ubuntu"
 //                    script{
@@ -66,14 +81,3 @@ pipeline {
 //                        }catch(error){
 //                            sh "ssh ubuntu@35.158.92.60 kubectl create -f train-schedule-kube.yml"
 //                        }
-//                kubernetesDeploy(
-//                    kubeconfigId: 'kubeconfig',
-//                    configs: 'train-schedule-kube.yml',
-//                    enableConfigSubstitution: true
-//                )
-//                    }
-//                }
-            }
-        }
-    }
-}
