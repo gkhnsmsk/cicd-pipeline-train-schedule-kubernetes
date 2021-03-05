@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  labels: 
+    app: train-schedule
+  name: train-schedule-deployment
+spec: 
+  replicas: 2
+  selector: 
+    matchLabels: 
+      app: train-schedule
+  template: 
+    metadata: 
+      labels: 
+        app: train-schedule
+    spec: 
+      containers:
+      - image: gsimsek/train-schedule-kubernetes:latest
+#      - image: "${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
+        name: train-schedule
+        ports:
+          - containerPort: 8080
+      imagePullSecrets: 
+        - name: regsecret
+---
+  
+kind: Service
+apiVersion: v1
+metadata:
+  name: train-schedule-service
+spec:
+  type: NodePort
+  selector:
+    app: train-schedule
+  ports:
+  - protocol: TCP
+    port: 30001
+    nodePort: 30001
