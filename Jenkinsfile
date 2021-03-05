@@ -61,7 +61,7 @@ pipeline {
             steps {
                 sh '''
                     export IMAGE="$DOCKER_IMAGE_NAME:$BUILD_NUMBER"
-                    kubectl apply -f train-schedule-kube.yml
+                    kubectl apply -f ./train-schedule-kube.yml
                     '''
             }
         }        
