@@ -53,7 +53,7 @@ pipeline {
             }
             steps {
                 withAWS(region:'eu-central-1',credentials:'aws') {
-                    sh 'aws eks --region eu-central-1 update-kubeconfig --name eksworkshop-eksctl
+                    sh 'aws eks --region eu-central-1 update-kubeconfig --name eksworkshop-eksctl'
 '       
                 }
             }
