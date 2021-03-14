@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     // app = docker.build(DOCKER_IMAGE_NAME)
-                    app = docker.build("docker_image:${env.BUILD_ID}")
+                    app = docker.build("$docker_image:${env.BUILD_ID}")
                     sh 'echo $app'
                     app.inside {
                         sh 'echo Hello, World!'
