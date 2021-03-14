@@ -5,7 +5,7 @@ pipeline {
         //be sure to replace "willbla" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "gitlab.lrz.de:5005/shortcut/tools/shortcut.lab/app_image"
         registry = "gitlab.lrz.de:5005"
-        registryCredential = "gitlab_token_for_EKS_pull"
+        //registryCredential = "gitlab_token_for_EKS_pull"
         //docker_image_name = "gsimsek/train-schedule-kubernetes"
     }
     stages {
@@ -36,7 +36,7 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('', 'registryCredential') {
+                    docker.withRegistry('', 'gitlab_token_for_EKS_pull') {
                    //docker.withRegistry('gitlab.lrz.de:5005/shortcut/tools/shortcut.lab/', 'gitlab_token_for_EKS_pull') {
                         app.push("${env.BUILD_NUMBER}")
                         //app.push("${env.build_number}")
