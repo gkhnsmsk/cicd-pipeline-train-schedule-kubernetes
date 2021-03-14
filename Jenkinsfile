@@ -36,9 +36,9 @@ pipeline {
                 script {
                     //docker.withRegistry('https://gitlab.lrz.de:5005', 'gitlab_token_for_EKS_pull') {
                     docker.withRegistry('gitlab.lrz.de:5005/shortcut/tools/shortcut.lab/', 'gitlab_token_for_EKS_pull') {
-                        //app.push("${env.BUILD_NUMBER}")
+                        app.push("${env.BUILD_NUMBER}")
                         //app.push("${env.build_number}")
-                        app.push("latest")
+                        //app.push("latest")
                     }
                 }
             }
