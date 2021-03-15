@@ -53,7 +53,8 @@ pipeline {
             }
             steps {
                 withAWS(region:'eu-central-1',credentials:'aws_credentials') {
-                    sh 'aws eks --region eu-central-1 update-kubeconfig --name eksworkshop-eksctl'       
+                    sh 'aws sts get-caller-identity'
+                    //sh 'aws eks --region eu-central-1 update-kubeconfig --name eksworkshop-eksctl'       
                 }
             }
         }
