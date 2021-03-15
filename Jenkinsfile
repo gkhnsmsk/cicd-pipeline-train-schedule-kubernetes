@@ -37,7 +37,8 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('https://gitlab.lrz.de:5005/shortcut/tools/shortcut.lab', 'gitlab_token_for_EKS_pull') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
+                    //docker.withRegistry('https://gitlab.lrz.de:5005/shortcut/tools/shortcut.lab', 'gitlab_token_for_EKS_pull') {
                    //docker.withRegistry('gitlab.lrz.de:5005/shortcut/tools/shortcut.lab/', 'gitlab_token_for_EKS_pull') {
                         //app.push("${env.BUILD_NUMBER}")
                         app.push()
