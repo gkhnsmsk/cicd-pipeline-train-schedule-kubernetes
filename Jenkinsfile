@@ -52,10 +52,10 @@ pipeline {
                 branch 'master'
             }
             steps {
-                //withAWS(region:'eu-central-1',credentials:'aws_credentials') {
-                withAWS(role:'eksworkshop-admin', roleAccount:'614257673227', externalId: 'i-0bcc1cdbb08437d5f', duration: 900, roleSessionName: 'jenkins-session') {
+                withAWS(region:'eu-central-1',credentials:'aws_credentials') {
+                //withAWS(role:'eksworkshop-admin', roleAccount:'614257673227', externalId: 'i-0bcc1cdbb08437d5f', duration: 900, roleSessionName: 'jenkins-session') {
                     sh 'aws sts get-caller-identity'
-                    //sh 'aws eks --region eu-central-1 update-kubeconfig --name eksworkshop-eksctl'       
+                    sh 'aws eks --region eu-central-1 update-kubeconfig --name eksworkshop-eksctl'
                 }
             }
         }
