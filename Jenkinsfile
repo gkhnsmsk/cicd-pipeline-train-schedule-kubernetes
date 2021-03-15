@@ -60,6 +60,7 @@ pipeline {
         stage('Deploy Updated Image to Cluster'){
             steps {
                 sh '''
+                    kubectl get pods
                     kubectl apply -f ./train-schedule-kube.yml
                     kubectl apply -f ./train-schedule-kube.yml -n test
                     kubectl apply -f ./train-schedule-kube.yml -n prod
