@@ -47,19 +47,21 @@ pipeline {
             sh "echo $DOCKER_IMAGE_NAME:$BUILD_NUMBER"    
             }
         }
+        /*
         stage('Update Kube Config') {
-            when {
-                branch 'master'
-            }
-            steps {
-                withAWS(region:'eu-central-1',credentials:'aws_credentials') {
+            //when {
+                //branch 'master'
+            //}
+            //steps {
+                //withAWS(region:'eu-central-1',credentials:'aws_credentials') {
                 //withAWS(role:'eksworkshop-admin', roleAccount:'614257673227', externalId: 'i-0bcc1cdbb08437d5f', duration: 900, roleSessionName: 'jenkins-session') {
-                    sh 'aws sts get-caller-identity'
-                    sh 'aws eks update-kubeconfig --name eksworkshop-eksctl --region eu-central-1 --role-arn arn:aws:iam::614257673227:role/eksctl-eksworkshop-eksctl-cluster-ServiceRole-1PYGRYN46G8AB'
-                    sh 'aws eks --region eu-central-1 update-kubeconfig --name eksworkshop-eksctl'
-                }
-            }
+                    //sh 'aws sts get-caller-identity'
+                    //sh 'aws eks update-kubeconfig --name eksworkshop-eksctl --region eu-central-1 --role-arn arn:aws:iam::614257673227:role/eksctl-eksworkshop-eksctl-cluster-ServiceRole-1PYGRYN46G8AB'
+                    //sh 'aws eks --region eu-central-1 update-kubeconfig --name eksworkshop-eksctl'
+                //}
+            //}
         }
+        */
         stage('Deploy Updated Image to Cluster'){
             steps {
                 sh '''
