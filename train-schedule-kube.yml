@@ -34,7 +34,7 @@ metadata:
 spec:
   selector:
     app: train-schedule
-  type: Loadbalancer
+  type: LoadBalancer
   ports:
   - protocol: TCP
     port: 80
