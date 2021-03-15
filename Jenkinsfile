@@ -52,7 +52,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                withAWS(region:'eu-central-1',credentials:'kubeconfig_EKS') {
+                withAWS(region:'eu-central-1',credentials:'aws_credentials') {
                     sh 'aws eks --region eu-central-1 update-kubeconfig --name eksworkshop-eksctl'       
                 }
             }
