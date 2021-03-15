@@ -34,7 +34,7 @@ metadata:
 spec:
   selector:
     app: train-schedule
-  type: ClusterIP
+  type: Loadbalancer
   ports:
   - protocol: TCP
     port: 80
