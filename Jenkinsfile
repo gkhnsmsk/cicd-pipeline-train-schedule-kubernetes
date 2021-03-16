@@ -66,8 +66,8 @@ pipeline {
         stage('Deploy Updated Image to Cluster'){
             steps {
                 sh '''
-                    kubectl get pods
                     kubectl apply -f ./train-schedule-kube.yml
+                    kubectl get pods
                     '''
             }
         }        
