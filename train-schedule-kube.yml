@@ -17,8 +17,8 @@ spec:
 #        tier: backend
     spec: 
       containers:
-      - image: gsimsek/train-schedule-kubernetes:latest
-#      - image: "${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
+#      - image: gsimsek/train-schedule-kubernetes:latest
+      - image: "${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
 #      - image: image-name
         name: train-schedule
         ports:
