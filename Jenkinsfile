@@ -37,9 +37,8 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
-                    //docker.withRegistry('https://gitlab.lrz.de:5005/shortcut/tools/shortcut.lab', 'gitlab_token_for_EKS_pull') {
-                   //docker.withRegistry('gitlab.lrz.de:5005/shortcut/tools/shortcut.lab/', 'gitlab_token_for_EKS_pull') {
+                    //docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
+                    docker.withRegistry('https://gitlab.lrz.de:5005/shortcut/tools/shortcut.lab', 'gitlab_token_for_EKS_pull') {
                         //app.push("${env.BUILD_NUMBER}")
                         app.push()
                         //app.push("latest")
@@ -52,6 +51,7 @@ pipeline {
             sh "echo $DOCKER_IMAGE_NAME:$BUILD_NUMBER"    
             }
         }
+        /*
         stage('Update Kube Config') {
             when {
                 branch 'gokhan_test'
@@ -62,10 +62,12 @@ pipeline {
                 }
             }
         }
+        */
         stage('Deploy Updated Image to Cluster'){
             steps {
                 sh '''
-                    kubectl get pods 
+                    kubectl get pods
+                    kubectl apply -f ./train-schedule-kube.yml
                     '''
             }
         }        
