@@ -3,7 +3,7 @@ pipeline {
     agent any
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
-        DOCKER_IMAGE_NAME = "gitlab.lrz.de:5005/shortcut/tools/shortcut.lab/app_image"
+        docker_image_name = "gitlab.lrz.de:5005/shortcut/tools/shortcut.lab/app_image"
         //REGISTRY = "gitlab.lrz.de:5005"
         //registryCredential = "gitlab_token_for_EKS_pull"
         //docker_image_name = "gsimsek/train-schedule-kubernetes"
@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     //app = docker.build(DOCKER_IMAGE_NAME)
-                    app = docker.build("$DOCKER_IMAGE_NAME:${env.BUILD_ID}")
+                    app = docker.build("$docker_image_name:${env.build_id}")
                     sh 'echo $app'
                     app.inside {
                         sh 'echo Hello, World!'
@@ -48,7 +48,7 @@ pipeline {
         }
         stage('echo') {
             steps {
-            sh "echo $DOCKER_IMAGE_NAME:$BUILD_NUMBER"    
+            sh "echo $docker_image_name:$build_id"    
             }
         }
         /*
