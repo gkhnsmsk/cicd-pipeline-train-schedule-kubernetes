@@ -18,8 +18,7 @@ spec:
     spec: 
       containers: 
 #      - image: gitlab.lrz.de:5005/shortcut/tools/shortcut.lab/app_imageä
-#      - image: $DOCKER_IMAGE_NAME:$BUILD_ID
-       - image: ${DOCKER_IMAGE_NAME}:${BUILD_ID}
+      - image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
         name: train-schedule
         ports:
           - containerPort: 8080
