@@ -17,7 +17,7 @@ spec:
 #        tier: backend
     spec: 
       containers: 
-      - image: gitlab.lrz.de:5005/shortcut/tools/shortcut.lab/app_image
+      - image: gitlab.lrz.de:5005/shortcut/tools/shortcut.lab/app_image:latest
 #      - image: $DOCKER_IMAGE_NAME:$BUILD_ID
         name: train-schedule
         ports:
