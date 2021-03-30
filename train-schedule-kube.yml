@@ -23,7 +23,7 @@ spec:
         ports:
           - containerPort: 8080
       imagePullSecrets: 
-        - name: my-reg
+        - name: regcred
 ---
   
 kind: Service
