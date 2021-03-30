@@ -22,8 +22,8 @@ pipeline {
             }
             steps {
                 script {
-                    app = docker.build(DOCKER_IMAGE_NAME)
-                    //app = docker.build("$DOCKER_IMAGE_NAME:${env.BUILD_ID}")
+                    //app = docker.build(DOCKER_IMAGE_NAME)
+                    app = docker.build("$DOCKER_IMAGE_NAME:${env.BUILD_ID}")
                     sh 'echo $app'
                     app.inside {
                         sh 'echo Hello, World!'
@@ -39,8 +39,8 @@ pipeline {
                 script {
                     //docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
                     docker.withRegistry('https://gitlab.lrz.de:5005/shortcut/tools/shortcut.lab', 'gitlab_token_for_EKS_pull') {
-                        app.push("${env.BUILD_NUMBER}") // burayi daha sonra commentle ve alttakini uncommentle
-                        //app.push()
+                        //app.push("${env.BUILD_NUMBER}") // burayi daha sonra commentle ve alttakini uncommentle
+                        app.push()
                         app.push("latest")  // burayi daha sonra commentle
                     }
                 }
