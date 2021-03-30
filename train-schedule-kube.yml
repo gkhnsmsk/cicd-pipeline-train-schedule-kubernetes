@@ -2,24 +2,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: 
   labels: 
-    app: train-schedule
-  name: train-schedule-deployment
+    app: train-schedule-gokhan-test
+  name: train-schedule-deployment-gokhan-test
 spec: 
   replicas: 2
   selector: 
     matchLabels: 
-      app: train-schedule
+      app: train-schedule-gokhan-test
 #      tier: backend
   template: 
     metadata: 
       labels: 
-        app: train-schedule
+        app: train-schedule-gokhan-test
 #        tier: backend
     spec: 
       containers: 
       - image: gitlab.lrz.de:5005/shortcut/tools/shortcut.lab/app_image:latest
 #      - image: $DOCKER_IMAGE_NAME:$BUILD_ID
-        name: train-schedule
+        name: train-schedule-gokhan-test
         ports:
           - containerPort: 8080
       imagePullSecrets: 
