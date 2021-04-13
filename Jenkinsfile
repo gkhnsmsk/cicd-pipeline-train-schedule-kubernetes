@@ -46,11 +46,6 @@ pipeline {
                 }
             }
         }
-        stage('echo') {
-            steps {
-            sh "echo $DOCKER_IMAGE_NAME:$BUILD_ID"    
-            }
-        }
         /*
         stage('Update Kube Config') {
             when {
