@@ -23,8 +23,8 @@ spec:
         name: train-schedule
         ports:
           - containerPort: 8080
-      imagePullSecrets: 
-        - name: regsecret
+#      imagePullSecrets: 
+#        - name: regsecret
 ---
   
 apiVersion: v1
