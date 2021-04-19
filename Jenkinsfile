@@ -47,44 +47,15 @@ pipeline {
             sh "echo $DOCKER_IMAGE_NAME:$BUILD_NUMBER"    
             }
         }
-        /*
-        stage('Update Kube Config') {
-            //when {
-                //branch 'master'
-            //}
-            //steps {
-                //withAWS(region:'eu-central-1',credentials:'aws_credentials') {
-                //withAWS(role:'eksworkshop-admin', roleAccount:'614257673227', externalId: 'i-0bcc1cdbb08437d5f', duration: 900, roleSessionName: 'jenkins-session') {
-                    //sh 'aws sts get-caller-identity'
-                    //sh 'aws eks update-kubeconfig --name eksworkshop-eksctl --region eu-central-1 --role-arn arn:aws:iam::614257673227:role/eksctl-eksworkshop-eksctl-cluster-ServiceRole-1PYGRYN46G8AB'
-                    //sh 'aws eks --region eu-central-1 update-kubeconfig --name eksworkshop-eksctl'
-                //}
-            //}
-        }
-        */
         stage('Deploy Updated Image to Cluster'){
             steps {
                 sh '''
                     kubectl get pods
                     kubectl apply -f ./train-schedule-kube.yml
-                    kubectl apply -f ./train-schedule-kube.yml -n test
-                    kubectl apply -f ./train-schedule-kube.yml -n prod
                     '''
+                    //kubectl apply -f ./train-schedule-kube.yml -n test
+                    //kubectl apply -f ./train-schedule-kube.yml -n prod
             }
         }        
     }
 }
-
-//                input 'Deploy to Production?'
-//                milestone(1)
-//                withKubeConfig([credentialsId: 'kubeconfig',serverUrl: 'https://E5624AA4631FF2516F793E316BA8889E.gr7.eu-central-1.eks.amazonaws.com']) {
-//                sh 'kubectl get pods'
-
-//                sshagent(['kubemaster_username_privatekey']){
-//                    sh "scp -o StrictHostKeyChecking=no train-schedule-kube.yml ubuntu@35.158.92.60:/home/ubuntu"
-//                    script{
-//                        try{
-//                            sh "ssh ubuntu@35.158.92.60 kubectl apply -f train-schedule-kube.yml"
-//                        }catch(error){
-//                            sh "ssh ubuntu@35.158.92.60 kubectl create -f train-schedule-kube.yml"
-//                        }
